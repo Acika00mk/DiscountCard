@@ -10,6 +10,10 @@
 <ion-content padding>
   <h3>Welcome to Discount card app</h3>
 
+  <button (click)="scan()" ion-button>Scan please</button>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div *ngIf="data && data.text">
+    <ngx-barcode [bc-value]="data.text" [bc-display-value]="true"></ngx-barcode>
+  </div>
+  <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
 </ion-content>
