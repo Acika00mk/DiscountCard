@@ -11,6 +11,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { NgxBarcodeModule } from "ngx-barcode";
 import { IonicStorageModule } from "@ionic/storage";
+import { StorageService } from "../services/storage.service";
+import { HTTP } from "@ionic-native/http";
+import { HttpAngularService } from "../services/HttpAngular.service";
+import { HttpNativeService } from "../services/HttpNative.service";
+import { HttpWrapperService } from "../services/HttpWrapper.service";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { CustomHttpInterceptor } from "../services/HttpInterceptor.service";
 
 @NgModule({
   declarations: [
@@ -32,11 +39,20 @@ import { IonicStorageModule } from "@ionic/storage";
     ListPage
   ],
   providers: [
-
+    HTTP,
+    HttpAngularService,
+    HttpNativeService,
+    HttpWrapperService,
     BarcodeScanner,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    StorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true
+    },
   ]
 })
 export class AppModule {}
