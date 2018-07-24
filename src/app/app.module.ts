@@ -10,17 +10,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { NgxBarcodeModule } from "ngx-barcode";
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     NgxBarcodeModule,
+    IonicStorageModule.forRoot(),
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,6 +32,7 @@ import { NgxBarcodeModule } from "ngx-barcode";
     ListPage
   ],
   providers: [
+
     BarcodeScanner,
     StatusBar,
     SplashScreen,
