@@ -1,4 +1,3 @@
-import { HttpRequest } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { HTTP } from '@ionic-native/http';
 
@@ -22,8 +21,8 @@ export class HttpNativeService {
   public get(url, params?: any, options: any = {}): Observable<any> {
     let responseData = this.http.get(url, params, {})
       .then(response => options.responseType == 'text' ? response.data : JSON.parse(response.data))
-      .catch(() => {
-        // TODO: Add Exception Handling
+      .catch((err) => {
+        console.error(err)
       });
     return Observable.fromPromise(responseData);
   }
@@ -38,8 +37,9 @@ export class HttpNativeService {
    */
   public post(url, params?: any, options: any = {}): Observable<any> {
     let responseData = this.http.post(url, params, {})
-      .then(response => options.responseType == 'text' ? response.data : JSON.parse(response.data)).catch(() => {
-        // TODO: Add Exception Handling
+      .then(response => options.responseType == 'text' ? response.data : JSON.parse(response.data))
+      .catch((err) => {
+        console.error(err)
       });
     return Observable.fromPromise(responseData);
   }
